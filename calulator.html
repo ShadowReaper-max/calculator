@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url('purple mountain.jpg') ;
+    background-repeat: no-repeat;
+    background-size: 1900px 1000px;
+    margin: 0;
+
+}
+
+.calculator {
+     backdrop-filter: blur(20px);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    border: 2px solid whitesmoke ;
+}
+
+#display {
+    width: calc(100% - 20px);
+    height: 60px;
+    background:transparent;
+    color: #fff;
+    font-size: 2em;
+    border: 2px solid white;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    text-align: right;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.buttons button {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5em;
+    border: 2px solid white;
+    border-radius: 30px;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.buttons button:hover {
+    background-color: #888;
+}
+
+.buttons button:active {
+    background-color: #555;
+}
+
+.buttons button:nth-child(4n), /* Operators */
+.buttons button:nth-child(16) /* Equals */ {
+    background-color: #ff9800;
+}
+
+.buttons button:nth-child(4n):hover,
+.buttons button:nth-child(16):hover {
+    background-color: #ffa726;
+}
+
+.buttons button:nth-child(4n):active,
+.buttons button:nth-child(16):active {
+    background-color: #e68a00;
+}
+
+.buttons button:first-child { /* Clear button */
+    background-color: #f44336;
+}
+
+.buttons button:first-child:hover {
+    background-color: #ef5350;
+}
+
+.buttons button:first-child:active {
+    background-color: #d32f2f;
+}
+
+</style>
+<body>
+    <img src="https://www.iconfinder.com/icons/7013428/business_calculation_mathematics_calculator_icon">
+    <div class="calculator">
+        <input type="text" id="display" readonly>
+        <div class="buttons">
+            <button onclick="clearDisplay()">C</button>
+            <button onclick="appendValue('/')">/</button>
+            <button onclick="appendValue('*')">*</button>
+            <button onclick="appendValue('-')">-</button>
+            <button onclick="appendValue('7')">7</button>
+            <button onclick="appendValue('8')">8</button>
+            <button onclick="appendValue('9')">9</button>
+            <button onclick="appendValue('+')">+</button>
+            <button onclick="appendValue('4')">4</button>
+            <button onclick="appendValue('5')">5</button>
+            <button onclick="appendValue('6')">6</button>
+            <button onclick="calculateResult()">=</button>
+            <button onclick="appendValue('1')">1</button>
+            <button onclick="appendValue('2')">2</button>
+            <button onclick="appendValue('3')">3</button>
+            <button onclick="appendValue('0')">0</button>
+            <button onclick="appendValue('.')">.</button>
+        </div>
+    </div>
+    <script>
+      let display = document.getElementById('display');
+let currentExpression = '';
+
+function appendValue(value) {
+    currentExpression += value;
+    display.value = currentExpression;
+}
+
+function clearDisplay() {
+    currentExpression = '';
+    display.value = '';
+}
+
+function calculateResult() {
+    try {
+        let result = eval(currentExpression);
+        display.value = result;
+        currentExpression = result.toString();
+    } catch (error) {
+        display.value = 'Error';
+        currentExpression = '';
+    }
+}
+    </script>
+</body>
+</html
